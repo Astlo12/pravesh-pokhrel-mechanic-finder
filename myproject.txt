@@ -1,0 +1,336 @@
+Introduction
+1.1 Introduction to Topic
+When moving or experiencing an emergency, vehicle owners have serious difficulties to find qualified
+mechanics who are also honest enough and willing to work on the vehicle in case of a breakdown or
+during regular maintenance. About 65 percent of the consumers complain of insecurities on trust and
+reliability in search of mechanics (jmc equipment , 2022). The owners of vehicles lose a lot of time
+visiting a variety of repair services only to find out that the necessary specialists are not available, the
+service is too far, or the service cannot provide knowledge about this brand. According to industry
+researches, more than 70 percent of clients are anxious of leaving their cars in unfamiliar repair shops
+without reviews and certifications leaving them vulnerable to receiving poor quality services and
+which cost them money.
+Competent mechanics, especially solitary workers, find it just as difficult to find a way to the potential
+clients who are not in their direct vicinity and gain their legitimacy on the market. The old method of
+word-of-mouth marketing and making of bookings through telephone do not work effectively, and
+this restricts opportunities of expanding business and complexity of building of trust in service
+relationship (jmc equipment , 2022).
+Mechanic Finder + Live ETA and Booking is a solution to this vacuum that will provide a transparent
+ecosystem as between vehicle owners and certified mechanics in real-time. With the help of modern
+web technologies, the platform allows its users to form full-fledged profiles with the models of
+vehicles, the locations of their favorite services, and which requirements they prefer. Mechanics are
+able to confirm certifications, specialization, area of services and expertise. The platform uses smart
+database and correlates mechanics against vehicle owners depending on location distance, brand focus,
+real time services, customer rating and service record.
+The platform will have live tracking and approximate arrival time making it dynamic and therefore
+creating trust and efficiency. This allows car owners to make a better choice and service requests to
+be handled efficiently by the mechanics and turn the traditional automotive repair into the modern-
+CS6PO5NT Final Year Project
+2
+day technology-driven ecosystem.
+1.2 Problem Scenario
+• The vehicle owners tend to have issues locating good people and even accessible mechanics in the
+case of emergency or traveling to new locations due to which quite a considerable part of the stress
+and unsafe conditions may be experienced.
+• Mechanics lack alternative access to the potential consumers who are not in their local network
+and have no channel to put their credentials, certifications, and areas of specialization in their
+proper places.
+• It is not simple to have vehicle owners check the qualification of the mechanics, the genuine
+customer review and to ensure that the mechanic is specialized in the type of vehicle (bike or car)
+he is handling which results into mismatched service expectations.
+• Current solutions are usually rooted on traditional telephone based booking system which is not
+efficient and can lead to a miscommunication, in addition, it does not record service history.
+• On-site automotive service platforms available do not have any specifications of emergency onsite services provided, or they lack detailed mechanic profile, which is specific to vehicle brand.
+CS6PO5NT Final Year Project
+3
+1.3 Project as a Solution
+Mechanic Finder + Live ETA & Booking will solve these issues by:
+• Web application designed to be user-friendly and providing online connection of the owners
+of vehicles with the local mechanism of search and filling out the forms based on the location
+and the search and filter system in terms of the vehicle type and the brand.
+• Incidentally mechanic check to authenticate credentials, qualifications and professional
+experience prior to listing.
+• Socket.io on-the-fly position of any mechanic and real time ETA.
+• Detailed profile of the mechanics and vehicle owner including area of expertise, certifications,
+work history and vehicle description.
+• Reliable rating and review section in which verified buyers who utilized the service may leave
+feedbacks.
+More Information on Appendix
+CS6PO5NT Final Year Project
+4
+2 Aims and Objective
+2.1 Aims
+This project will be focused on creating a transparent and user-friendly web-based platform that helps
+to match vehicle owners to verified mechanics in real time effectively. It aims at streamlining
+mechanic discovery when there is an emergency or a regular checkup by use of location based search,
+real-time tracking and profiles. The platform is finally targeted at the establishment of trust,
+enhancement of the reliability of the services, and the technological upkeep of the automotive service
+system through scalable means (softwaredevelopment.co.uk, 2025).
+2.2 Objective
+• To develop and deploy a web based application with responsiveness in full-stack technologies
+of a vehicle owner-mechanic interaction.
+• To combine the location-based search, map view, and real-time ETA, on behalf of nearby
+available mechanics.
+• To create safe authentication, verified profile of mechanics and owned rating/review system
+that would guarantee transparency and credibility.
+• In a bid to deliver a lean booking and communication process of requesting, accepting, tracking
+and managing service jobs in real-time.
+• To test the usability and usability of the system among users and improve on features in an
+iterative process to achieve greater reliability and user satisfaction
+(softwaredevelopment.co.uk, 2025).
+CS6PO5NT Final Year Project
+5
+3 Expected Outcomes and Deliverables
+Upon the completion of Mechanic Finder + Live ETA & Booking we will be in a position to
+accomplish the following:
+• Web site that has a responsive design and user-friendly, mobile-friendly interface in which the
+owners and mechanics will create an account, request onsite/emergency assistance and book
+workshop service.
+• Smart search in the form of a map (Leaflet/Google Maps API) of mechanics nearby with a filter
+based on categories of vehicles, specialization by brand, rating, and real-time availability.
+• Live tracking socket.io-based lasting tracking of mechanic location, real ETA, and open and
+transparent status of each request.
+• Profiling with verified credentials and certifications and documentation verified in advance by
+means of administered mechanic verification (at least indicated by visible symbols).
+• The rich profiles with exhibited specializations (cars/bikes), services, geographical area of work,
+working time and availability; the owner will make a choice out of detailed information.
+More information on Appendix
+CS6PO5NT Final Year Project
+6
+4 Project Risks, Threats, and Contingency Plans
+Table 1: Table for Risks, Threats, and Contingency Plans.
+Project Risks & Threats Description Contingency Plans
+Smart Matchmaking
+Algorithm Challenges
+The algorithm may
+provide inaccurate
+matches, leading to
+user dissatisfaction.
+Regularly test and optimize the
+algorithm using diverse datasets.
+Collect user feedback
+to refine results.
+Technical Issues Potential downtime,
+performance lags, orsystem
+crashes that disrupt
+usability.
+Use robust monitoring toolsto
+identify and address issues
+promptly. Implement failover
+mechanisms for critical
+functions.
+Data Security Vulnerabilities Risk of data breaches or
+unauthorized access to
+sensitive user
+information.
+Employ strong encryption, secure
+API practices, and conduct regular
+security audits.
+Weak Authentication
+Mechanisms
+Insufficient security
+measures could allow
+unauthorized accessto user
+accounts.
+Implement two-factor
+authentication and enforce strong
+password policies. Conduct
+periodic penetration
+tests.
+User Engagement
+Challenges
+Difficulty in maintaining
+user interest and
+participation over time.
+Introduce gamification elements,
+regular content updates, and
+reward programs
+to sustain user engagement.
+Scalability Issues Platform may fail to
+handle increased traffic or
+data as it grows.
+Design scalable infrastructure
+using cloud services. Monitor
+system performance during peak
+loads and optimize
+resources.
+CS6PO5NT Final Year Project
+7
+5 Methodology
+5.1 Considered Methodology
+5.1.1 RUP Methodology
+Figure 1: Figure of RUP Methodology.
+Rational Unified Process (RUP) is a management technique in software development best aligned with
+large organizations that develop complex and large-scale systems which in turn use a huge team. It
+organizes the project life cycle into four stages namely Inception, Elaboration, Construction, and
+Transition. The first of these activities includes inception involving requirements gathering, feasibility,
+and project scope and objectives. Refinement of requirements, dealing with major risks and the
+establishment of a stable architectural bottom is realised during Elaboration. Construction majorly
+involves implementation of the system that is achieved by codifying, testing, and integrating and the
+Transition stage majorly requires delivery of the product, user training, and feedback assessment to
+ensure that the user requirements are met (geeksforgeeks.org, 2024).
+CS6PO5NT Final Year Project
+8
+5.1.2 Waterfall Methodology
+Figure 2: Figure of Waterfall Methodology.
+Waterfall Model is a conventional, linear software development approach that matches to small or a
+clear project whose requirements are constant. It breaks development in to stages sequentially:
+Requirements, Analysis, Design, Implementation, Testing, Deployment and the Maintenance. During
+the Requirement and Analysis stages, the needs of the stakeholders are collected, recorded and
+assessed on technical, business and financial viability. Design stage generates specifications in
+components and architectural specifications. These designs are then implemented into working code
+then Testing is done to identify and fix the defects. And lastly, Deployment deploys the system to
+users, and Maintenance addresses the post-release concerns and improvement with time
+(BrowserStack, 2024).
+CS6PO5NT Final Year Project
+9
+5.1.3 Prototype Methodology
+Figure 3: Figure of Prototype Methodology.
+The Prototyping Model is a loose and dynamic software development model that would be adequate
+in those projects that have ambiguous or may vary requirements and that the constant user feedback
+is essential. It is normally carried out in the steps of Requirement Identification, Prototype
+Development, User Evaluation, Refinement and Final System Development. The first requirements
+are collected to create a working prototype that serves as a basis of the developed system,
+implementing the main features enabling users to have contact with the real form of the system. User
+Evaluation requirements are then converted into feedback during the Refinement stage where
+functionality, usability and design can be rectified in successive phases until expectations are yielded
+and the finished system is then engineered, tested and deployed using the tested prototype
+(geeksforgeeks, 2023).
+CS6PO5NT Final Year Project
+10
+5.2 Selected Methodology
+5.2.1 Agile Methodology
+Figure 4: Figure of Agile Methodology.
+Agile methodology can be described as an iterative, incremental software development methodology
+that focuses on flexibility, collaboration and continuous improvement. It is based on the Agile
+Manifesto, with its focus on the people and interactions, software, cooperation with customers, and
+readiness to changes. Scrum, Kanban and Extreme Programming frameworks use these principles with
+short development cycles and frequent feedback by stakeholders, allowing new elements to be added
+to the team by responding fast to changing needs. Agile is considered to be more efficient in dealing
+with uncertainty, developing more autonomy in the team, and developing more quality products, as
+compared to the linear models, such as Waterfall, and therefore, the approach is considered more
+customer-focused towards development in complicated changing environments. (Laoyan, 2025).
+CS6PO5NT Final Year Project
+11
+6 Resource and Requirements
+6.1 Hardware Requirements
+• Development Workstation
+o Modern Computer with at least an intel i5 processor or equivalent.
+o A minimum of 8 GB RAM or more is recommended.
+6.2 Software Requirements
+• Frontend:
+o React
+• Backend:
+o Node.js and Express.js
+• Database:
+o MySQL Workbench
+• Version Control:
+o Git
+• IDE:
+o Visual Studio Code
+• API Development and Testing Platform:
+o Postman
+• Designing Tool:
+o Figma
+CS6PO5NT Final Year Project
+12
+7 Work Breakdown Structure
+Figure 5: Figure of WBS.
+CS6PO5NT Final Year Project
+13
+8 Milestone Chart
+• Milestone 1: Title and Feature Finalization
+o Title and Feature Finalization Finalize the project topic and key features in
+consultation with the supervisor to establish a clear project vision.
+• Milestone 2: Proposal Report Preparation and Submission
+o Project Proposal Submit the proposal, outlining the main aspects of the project,
+initial requirements, and a brief overview of the planned development process.
+• Milestone 3: System Design
+o System Design Create a detailed system design that includes architecture planning
+and identifying the core components of the platform.
+• Milestone 4: UI/UX Design
+o UI Design Develop wireframes and mock-ups for the user interface, ensuring userfriendliness and alignment with project requirements.
+• Milestone 5: System Development
+o System Development up to 2 to 3 Sprints Begin the development process through
+initial sprints, focusing on implementing core features such as authentication,
+profile creation, and basic navigation.
+• Milestone 6: Interim Report Preparation and Submission
+o Interim Report Prepare the interim report based on progress up to this point. This
+report will detail the status of the project and outline any findings, challenges, or
+necessary adjustments.
+• Milestone 7: System Development
+o System Development of All Remaining Sprints Continue and complete the
+development work across the remaining sprints, integrating features like Smart
+Matchmaking, project tracking, and communication tools.
+• Milestone 8: Testing
+o Testing the System Conduct thorough testing of the entire system, ensuring
+functionality, performance, and usability. Identify and address any issues or bugs.
+• Milestone 9: Deployment
+o Deploying the System Deploy the fully tested system to a live environment, making
+CS6PO5NT Final Year Project
+14
+it accessible for user interaction and feedback.
+• Milestone 10: Final Report Preparation and Submission
+o Final Report Preparation Compile the final report, including detailed
+documentation of the development process, system architecture, features, and user
+guide.
+• Milestone 11: Submission of Project
+o Submit the Project Submit the completed project, including the final report and any
+relevant documentation for assessment and review.
+CS6PO5NT Final Year Project
+15
+9 Gantt chart
+Figure 6: Figure of Gantt Chart.
+CS6PO5NT Final Year Project
+16
+10 Conclusion
+Mechanic Finder + Live ETA & Booking is a solution to one of the most urgent problems of the
+automotive service market as it will create a clear, convenient application that will provide vehicle
+owners with real-time access to qualified mechanics. This platform will change the access to and
+delivery of the vehicle repair service with the help of the location-based search, live-tracking
+system, the rich mechanic profiles, and the authenticated review system (Socket.io, 2024).
+Based on the modern web technologies such as React, Node.js, MySQL, and Socket.io, relying on
+the Agile SCRUM development approach, this project will provide a high-quality, user-friendly
+platform that can offer the advantages of the vehicle owners who will need reliable help and the
+professional mechanics who will need to gain more business opportunities. The solution simplifies
+mechanic discovery in time of emergency but also creates a trust and accountability atmosphere
+in the automotive service environment, showing it to be a viable solution (w3school, 2024).
+The project is a great chance to use theoretical base in practice and act widely with the full-stack
+web development, real-time communications system, and modern software engineering patterns.
+The effective implementation of Mechanic Finder will be used to prove that technology-based
+solutions can effectively be used to modernize traditional service industries (FullStack Labs,
+2025).
+
+
+Mechanic Finder:
+I am writing to propose my final-year project titled “Mechanic Finder + Live ETA &
+Booking.” This project is a smart web-based platform designed to connect vehicle owners with
+verified nearby mechanics in real time. It addresses the common challenge of finding reliable and
+available mechanics, especially in unfamiliar areas or emergency situations.
+The system enables users to search for available mechanics based on their live location, view
+their estimated time of arrival (ETA), and book either on-site assistance or scheduled repair
+services. Mechanics can manage their availability, accept or reject booking requests, and
+update their live location while traveling to the customer’s destination. This creates smooth,
+transparent interaction between the user and the mechanic.
+The platform also checks and certifies Mechanic for capabilities of repairing bikes & cars of every
+kind, Mechanics have their own profile and on that they can add the brand of bike & cars they are
+comfortable with repairing. And seeing that the vehicle owners can see the reviews and brands of
+bike and cars the mechanic can repair and are comfortable with, the vehicle owners can decide to
+go for the repair or call.
+The platform is built using React for the front-end, Node.js for the backend, and MySQL as the
+database. It incorporates real-time communication through Socket.io and map integration
+using Leaflet or Google Maps API to display mechanic locations and live ETAs accurately.
+In addition to core features, the system enhances user confidence and comfort by allowing
+customers to view each mechanic’s professional profile, including:
+• The brands and vehicle types (motorbikes or cars) the mechanic is certified or experienced
+to repair.
+• Customer reviews and ratings that reflect their service quality and reliability.
+• A visual section showing the number of customers who have previously booked services
+from that mechanic.
+This added layer of transparency helps users make informed decisions and feel more comfortable
+entrusting their vehicles to verified professionals rather than unknown local shops.
+Overall, Mechanic Finder + Live ETA & Booking aims to simplify vehicle repair assistance,
+improve trust between customers and service providers, and bring convenience to both parties
+through the use of modern web technologies. The platform not only streamlines the process of
+finding and booking mechanics but also contributes to building a more connected and reliable
+vehicle service ecosystem.
+Kind regards
