@@ -191,3 +191,7 @@ ALL FEATURES - Mechanic Finder + Live ETA & Booking
     • Make informed decisions based on mechanic profiles
 
 
+---
+MECHANIC UI IMPLEMENTATION TRACKER
+See docs/MECHANIC_FEATURES_ROADMAP.md for phased mechanic-side delivery (workspace, profile, comms, etc.).
+

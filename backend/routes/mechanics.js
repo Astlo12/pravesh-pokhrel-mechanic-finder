@@ -4,6 +4,7 @@ const User = require('../models/User');
 const Review = require('../models/Review');
 const { ObjectId } = require('../config/database');
 const authenticate = require('../middleware/auth');
+const optionalAuth = require('../middleware/optionalAuth');
 const { upload, uploadToCloudinary } = require('../utils/upload');
 const router = express.Router();
 
@@ -146,14 +147,25 @@ router.get('/nearby', async (req, res) => {
   }
 });
 
-// Get mechanic profile by ID
-router.get('/:id', async (req, res) => {
+// Get mechanic profile by ID (unverified profiles hidden from public; owner & admin may view)
+router.get('/:id', optionalAuth, async (req, res) => {
   try {
     const { id } = req.params;
 
     const mechanic = await Mechanic.findById(id);
 
     if (!mechanic) {
+      return res.status(404).json({ error: 'Mechanic not found' });
+    }
+
+    const ownerId = mechanic.user_id
+      ? (typeof mechanic.user_id === 'object' ? mechanic.user_id.toString() : mechanic.user_id)
+      : null;
+    const viewerId = req.user?.id;
+    const viewerIsOwner = viewerId && ownerId && viewerId === ownerId;
+    const viewerIsAdmin = req.user?.user_type === 'admin';
+
+    if (!mechanic.is_verified && !viewerIsOwner && !viewerIsAdmin) {
       return res.status(404).json({ error: 'Mechanic not found' });
     }
 
@@ -235,6 +247,12 @@ router.put('/:id/availability', authenticate, async (req, res) => {
     const userId = mechanic.user_id ? (typeof mechanic.user_id === 'object' ? mechanic.user_id.toString() : mechanic.user_id) : null;
     if (userId !== req.user.id) {
       return res.status(403).json({ error: 'Unauthorized' });
+    }
+
+    if (!mechanic.is_verified) {
+      return res.status(403).json({
+        error: 'Your profile must be verified by an admin before you can change availability.',
+      });
     }
 
     const updateData = {};
@@ -342,6 +360,12 @@ router.put('/:id/online', authenticate, async (req, res) => {
     const userId = mechanic.user_id ? (typeof mechanic.user_id === 'object' ? mechanic.user_id.toString() : mechanic.user_id) : null;
     if (userId !== req.user.id) {
       return res.status(403).json({ error: 'Unauthorized' });
+    }
+
+    if (!mechanic.is_verified) {
+      return res.status(403).json({
+        error: 'Your profile must be verified by an admin before you can appear online.',
+      });
     }
 
     await Mechanic.update(id, { is_online });

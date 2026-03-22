@@ -15,6 +15,25 @@ class Review {
     return result.insertedId;
   }
 
+  static async findByBookingId(bookingId) {
+    const collection = this.collection();
+    const oid = typeof bookingId === 'string' ? new ObjectId(bookingId) : bookingId;
+    return await collection.findOne({ booking_id: oid });
+  }
+
+  /** All reviews by this customer for the given booking ObjectIds */
+  static async findByCustomerForBookings(customerId, bookingObjectIds) {
+    const collection = this.collection();
+    const custOid = typeof customerId === 'string' ? new ObjectId(customerId) : customerId;
+    if (!bookingObjectIds.length) return [];
+    return await collection
+      .find({
+        customer_id: custOid,
+        booking_id: { $in: bookingObjectIds },
+      })
+      .toArray();
+  }
+
   static async findByMechanicId(mechanicId, limit = 10) {
     const collection = this.collection();
     const objectId = typeof mechanicId === 'string' ? new ObjectId(mechanicId) : mechanicId;

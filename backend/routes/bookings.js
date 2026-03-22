@@ -2,8 +2,11 @@ const express = require('express');
 const Booking = require('../models/Booking');
 const Mechanic = require('../models/Mechanic');
 const User = require('../models/User');
+const Review = require('../models/Review');
 const { ObjectId } = require('../config/database');
 const authenticate = require('../middleware/auth');
+const { validateTransition, isValidStatus } = require('../utils/bookingTransitions');
+const { onBookingCreated, onBookingStatusChange } = require('../utils/notify');
 const router = express.Router();
 
 // Create booking
@@ -43,14 +46,17 @@ router.post('/', authenticate, async (req, res) => {
     }
     
     const mechanic = await Mechanic.findById(mechanicIdStr);
-    let mechanicLat = null;
-    let mechanicLng = null;
-    
-    if (mechanic) {
-      // Use current location (real-time) if available, otherwise use base location
-      mechanicLat = mechanic.current_latitude || mechanic.latitude;
-      mechanicLng = mechanic.current_longitude || mechanic.longitude;
+    if (!mechanic) {
+      return res.status(404).json({ error: 'Mechanic not found' });
     }
+    if (!mechanic.is_verified) {
+      return res.status(403).json({
+        error: 'This mechanic is not verified yet and cannot accept bookings.',
+      });
+    }
+
+    const mechanicLat = mechanic.current_latitude || mechanic.latitude;
+    const mechanicLng = mechanic.current_longitude || mechanic.longitude;
 
     // Validate customer_id (req.user.id) is a valid ObjectId
     if (!/^[0-9a-fA-F]{24}$/.test(String(req.user.id))) {
@@ -96,6 +102,12 @@ router.post('/', authenticate, async (req, res) => {
       mechanic_current_longitude: mechanic ? (mechanic.current_longitude || mechanic.longitude) : null
     };
 
+    try {
+      await onBookingCreated(booking, customer ? customer.name : null, mechanic ? mechanic.business_name : null);
+    } catch (notifyErr) {
+      console.error('Booking created notify error:', notifyErr);
+    }
+
     res.status(201).json(bookingResponse);
   } catch (error) {
     console.error('Create booking error:', error);
@@ -114,6 +126,9 @@ router.get('/customer', authenticate, async (req, res) => {
     }
 
     const bookings = await Booking.findByCustomerId(req.user.id);
+    const bookingOids = bookings.map((b) => b._id);
+    const myReviews = await Review.findByCustomerForBookings(req.user.id, bookingOids);
+    const reviewByBookingId = new Map(myReviews.map((r) => [r.booking_id.toString(), r]));
 
     // Populate mechanic data
     for (let booking of bookings) {
@@ -141,6 +156,15 @@ router.get('/customer', authenticate, async (req, res) => {
         booking.customer_latitude = booking.latitude;
         booking.customer_longitude = booking.longitude;
       }
+
+      const rev = reviewByBookingId.get(booking._id.toString());
+      booking.my_review = rev
+        ? {
+            rating: rev.rating,
+            comment: rev.comment || null,
+            created_at: rev.created_at,
+          }
+        : null;
     }
 
     res.json(bookings);
@@ -199,56 +223,73 @@ router.get('/mechanic', authenticate, async (req, res) => {
   }
 });
 
-// Update booking status (accept/reject)
+// Update booking status (role-based state machine)
 router.put('/:id/status', authenticate, async (req, res) => {
   try {
     const { id } = req.params;
     const { status, estimated_eta } = req.body;
 
-    if (!status || !['accepted', 'rejected', 'in_progress', 'completed', 'cancelled'].includes(status)) {
+    if (!status || !isValidStatus(status)) {
       return res.status(400).json({ error: 'Invalid status' });
     }
 
-    // Get booking
     const booking = await Booking.findById(id);
 
     if (!booking) {
       return res.status(404).json({ error: 'Booking not found' });
     }
 
-    // Verify authorization
+    let role = null;
     if (req.user.user_type === 'mechanic') {
       const mechanic = await Mechanic.findByUserId(req.user.id);
       if (!mechanic || mechanic._id.toString() !== booking.mechanic_id.toString()) {
         return res.status(403).json({ error: 'Unauthorized' });
       }
+      if (!mechanic.is_verified && (status === 'accepted' || status === 'rejected')) {
+        return res.status(403).json({
+          error: 'Your profile must be verified before you can accept or reject booking requests.',
+        });
+      }
+      role = 'mechanic';
     } else if (req.user.user_type === 'customer') {
       if (booking.customer_id.toString() !== req.user.id) {
         return res.status(403).json({ error: 'Unauthorized' });
       }
+      role = 'customer';
+    } else {
+      return res.status(403).json({ error: 'Unauthorized' });
     }
 
-    // Update booking
-    const updateData = { status };
-    if (estimated_eta && status === 'accepted') {
-      updateData.estimated_eta = estimated_eta;
+    const result = validateTransition(booking, status, role);
+    if (!result.ok) {
+      return res.status(400).json({ error: result.error });
     }
-    if (status === 'in_progress') {
-      updateData.actual_arrival_time = new Date();
+
+    const updateData = { ...result.update };
+    if (estimated_eta != null && status === 'accepted') {
+      const n = typeof estimated_eta === 'number' ? estimated_eta : parseInt(String(estimated_eta), 10);
+      if (Number.isFinite(n)) updateData.estimated_eta = n;
     }
 
     await Booking.update(id, updateData);
 
-    // If accepted, update mechanic availability
+    const mechanicIdStr =
+      booking.mechanic_id && typeof booking.mechanic_id === 'object'
+        ? booking.mechanic_id.toString()
+        : String(booking.mechanic_id);
+
     if (status === 'accepted' && booking.mechanic_id) {
-      const mechanicId = typeof booking.mechanic_id === 'object' ? booking.mechanic_id.toString() : booking.mechanic_id;
-      await Mechanic.update(mechanicId, { is_available: false });
+      await Mechanic.update(mechanicIdStr, { is_available: false });
     }
 
-    // If completed or cancelled, make mechanic available again
-    if ((status === 'completed' || status === 'cancelled') && booking.mechanic_id) {
-      const mechanicId = typeof booking.mechanic_id === 'object' ? booking.mechanic_id.toString() : booking.mechanic_id;
-      await Mechanic.update(mechanicId, { is_available: true });
+    if ((status === 'completed' || status === 'cancelled' || status === 'rejected') && booking.mechanic_id) {
+      await Mechanic.update(mechanicIdStr, { is_available: true });
+    }
+
+    try {
+      await onBookingStatusChange(booking, status);
+    } catch (notifyErr) {
+      console.error('Booking status notify error:', notifyErr);
     }
 
     res.json({ message: 'Booking status updated successfully' });
@@ -291,10 +332,34 @@ router.get('/:id', authenticate, async (req, res) => {
       id: booking._id.toString(),
       customer_name: customer ? customer.name : null,
       customer_phone: customer ? customer.phone : null,
+      customer_profile_picture: customer ? (customer.profile_picture || null) : null,
       mechanic_name: mechanicUser ? mechanicUser.name : null,
       mechanic_phone: mechanicUser ? mechanicUser.phone : null,
-      business_name: mechanic ? mechanic.business_name : null
+      mechanic_profile_picture: mechanicUser ? (mechanicUser.profile_picture || null) : null,
+      business_name: mechanic ? mechanic.business_name : null,
+      rating: mechanic ? mechanic.rating : null,
+      mechanic_current_latitude: mechanic
+        ? (mechanic.current_latitude || mechanic.latitude)
+        : null,
+      mechanic_current_longitude: mechanic
+        ? (mechanic.current_longitude || mechanic.longitude)
+        : null,
+      customer_latitude: booking.customer_latitude || booking.latitude,
+      customer_longitude: booking.customer_longitude || booking.longitude
     };
+
+    if (req.user.user_type === 'customer' && booking.customer_id.toString() === req.user.id) {
+      const rev = await Review.findByBookingId(id);
+      if (rev && rev.customer_id && rev.customer_id.toString() === req.user.id) {
+        bookingResponse.my_review = {
+          rating: rev.rating,
+          comment: rev.comment || null,
+          created_at: rev.created_at,
+        };
+      } else {
+        bookingResponse.my_review = null;
+      }
+    }
 
     res.json(bookingResponse);
   } catch (error) {

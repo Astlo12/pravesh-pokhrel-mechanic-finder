@@ -35,8 +35,9 @@ class Mechanic {
   static async findAllActive(filters = {}) {
     const collection = this.collection();
     
-    // Query for all active mechanics
+    // Only admin-verified mechanics appear in public discovery
     const query = {
+      is_verified: true,
       is_available: true,
       is_online: true,
       $or: [
@@ -115,6 +116,7 @@ class Mechanic {
     // MongoDB geospatial query
     // Include mechanics with either base location or current location
     const query = {
+      is_verified: true,
       is_available: true,
       is_online: true,
       $or: [

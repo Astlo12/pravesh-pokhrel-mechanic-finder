@@ -7,6 +7,7 @@ const OTP = require('../models/OTP');
 const { sendOTPEmail } = require('../utils/emailService');
 const { ObjectId } = require('../config/database');
 const { body, validationResult } = require('express-validator');
+const { onMechanicRegistered } = require('../utils/notify');
 const router = express.Router();
 
 // Register
@@ -47,8 +48,14 @@ router.post('/register', [
     // If mechanic, create mechanic profile
     if (user_type === 'mechanic') {
       await Mechanic.create({
-        user_id: userId
+        user_id: userId,
+        is_verified: false,
       });
+      try {
+        await onMechanicRegistered(name, email);
+      } catch (notifyErr) {
+        console.error('Mechanic register notify error:', notifyErr);
+      }
     }
 
     // Generate token

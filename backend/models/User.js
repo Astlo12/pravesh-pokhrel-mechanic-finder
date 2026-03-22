@@ -34,6 +34,11 @@ class User {
       { $set: { ...updateData, updated_at: new Date() } }
     );
   }
+
+  static async findAdmins() {
+    const collection = this.collection();
+    return await collection.find({ user_type: 'admin' }).toArray();
+  }
 }
 
 module.exports = User;

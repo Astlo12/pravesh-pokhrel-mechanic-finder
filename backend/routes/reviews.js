@@ -4,6 +4,8 @@ const Booking = require('../models/Booking');
 const User = require('../models/User');
 const { ObjectId } = require('../config/database');
 const authenticate = require('../middleware/auth');
+const Mechanic = require('../models/Mechanic');
+const { onReviewCreated } = require('../utils/notify');
 const router = express.Router();
 
 // Create review
@@ -35,10 +37,7 @@ router.post('/', authenticate, async (req, res) => {
       return res.status(400).json({ error: 'Booking must be completed to review' });
     }
 
-    // Check if review already exists
-    const existingReviews = await Review.findByMechanicId(booking.mechanic_id.toString());
-    const existingReview = existingReviews.find(r => r.booking_id && r.booking_id.toString() === booking_id);
-
+    const existingReview = await Review.findByBookingId(booking_id);
     if (existingReview) {
       return res.status(400).json({ error: 'Review already exists for this booking' });
     }
@@ -56,6 +55,18 @@ router.post('/', authenticate, async (req, res) => {
     const mechanicId = booking.mechanic_id ? (typeof booking.mechanic_id === 'object' ? booking.mechanic_id.toString() : booking.mechanic_id) : null;
     if (mechanicId) {
       await Review.updateMechanicRating(mechanicId);
+    }
+
+    try {
+      const customer = await User.findById(req.user.id);
+      const mechanicDoc = mechanicId ? await Mechanic.findById(mechanicId) : null;
+      await onReviewCreated(
+        mechanicDoc?.user_id,
+        rating,
+        customer ? customer.name : null
+      );
+    } catch (notifyErr) {
+      console.error('Review created notify error:', notifyErr);
     }
 
     res.status(201).json({ message: 'Review created successfully' });

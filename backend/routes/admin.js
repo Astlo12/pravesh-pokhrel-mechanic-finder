@@ -4,6 +4,7 @@ const User = require('../models/User');
 const Mechanic = require('../models/Mechanic');
 const Booking = require('../models/Booking');
 const { getCollection, ObjectId } = require('../config/database');
+const { onMechanicVerified, onBookingStatusChange } = require('../utils/notify');
 const router = express.Router();
 
 // Admin Dashboard Stats
@@ -18,8 +19,17 @@ router.get('/dashboard/stats', adminAuth, async (req, res) => {
     const totalMechanics = await usersCollection.countDocuments({ user_type: 'mechanic' });
     const totalBookings = await bookingsCollection.countDocuments();
     const pendingBookings = await bookingsCollection.countDocuments({ status: 'pending' });
-    const activeBookings = await bookingsCollection.countDocuments({ 
-      status: { $in: ['accepted', 'in_progress', 'on_the_way'] } 
+    const activeBookings = await bookingsCollection.countDocuments({
+      status: {
+        $in: [
+          'accepted',
+          'mechanic_arrived',
+          'arrival_confirmed',
+          'in_progress',
+          'completion_pending',
+          'on_the_way',
+        ],
+      },
     });
     const completedBookings = await bookingsCollection.countDocuments({ status: 'completed' });
     const verifiedMechanics = await mechanicsCollection.countDocuments({ is_verified: true });
@@ -209,7 +219,13 @@ router.put('/mechanics/:id/verify', adminAuth, async (req, res) => {
     }
 
     await Mechanic.update(id, { is_verified });
-    
+
+    try {
+      await onMechanicVerified(mechanic.user_id, is_verified);
+    } catch (notifyErr) {
+      console.error('Verify mechanic notify error:', notifyErr);
+    }
+
     res.json({ 
       message: `Mechanic ${is_verified ? 'verified' : 'unverified'} successfully`,
       is_verified 
@@ -316,7 +332,18 @@ router.put('/bookings/:id/status', adminAuth, async (req, res) => {
     const { id } = req.params;
     const { status } = req.body;
 
-    const validStatuses = ['pending', 'accepted', 'rejected', 'in_progress', 'on_the_way', 'completed', 'cancelled'];
+    const validStatuses = [
+      'pending',
+      'accepted',
+      'rejected',
+      'mechanic_arrived',
+      'arrival_confirmed',
+      'in_progress',
+      'completion_pending',
+      'completed',
+      'cancelled',
+      'on_the_way',
+    ];
     if (!validStatuses.includes(status)) {
       return res.status(400).json({ error: 'Invalid status' });
     }
@@ -327,7 +354,13 @@ router.put('/bookings/:id/status', adminAuth, async (req, res) => {
     }
 
     await Booking.update(id, { status });
-    
+
+    try {
+      await onBookingStatusChange(booking, status, { notifyAdmins: false });
+    } catch (notifyErr) {
+      console.error('Admin booking status notify error:', notifyErr);
+    }
+
     res.json({ 
       message: 'Booking status updated successfully',
       status 

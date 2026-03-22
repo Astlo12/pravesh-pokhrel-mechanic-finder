@@ -7,6 +7,7 @@ const { connectDB } = require('./config/database');
 const { testEmailConnection } = require('./utils/emailService');
 const Mechanic = require('./models/Mechanic');
 const Booking = require('./models/Booking');
+const { setNotificationIO } = require('./utils/notificationHub');
 
 const app = express();
 const server = http.createServer(app);
@@ -16,6 +17,7 @@ const io = socketIo(server, {
     methods: ["GET", "POST"]
   }
 });
+setNotificationIO(io);
 
 // Middleware
 app.use(cors());
@@ -28,6 +30,7 @@ app.use('/api/mechanics', require('./routes/mechanics'));
 app.use('/api/bookings', require('./routes/bookings'));
 app.use('/api/reviews', require('./routes/reviews'));
 app.use('/api/admin', require('./routes/admin'));
+app.use('/api/notifications', require('./routes/notifications'));
 
 // Health check
 app.get('/api/health', (req, res) => {
@@ -41,16 +44,26 @@ const activeCustomers = new Map(); // socketId -> { userId }
 io.on('connection', (socket) => {
   console.log('User connected:', socket.id);
 
+  socket.on('notifications:join', (data) => {
+    const uid = data && data.userId;
+    if (uid && /^[0-9a-fA-F]{24}$/.test(String(uid))) {
+      socket.join(`user:${uid}`);
+    }
+  });
+
   // Mechanic connects and shares location
   socket.on('mechanic:connect', async (data) => {
     const { mechanicId, userId } = data;
     activeMechanics.set(socket.id, { mechanicId, userId });
     socket.join(`mechanic:${mechanicId}`);
-    
-    // Set mechanic as online
+
     try {
-      await Mechanic.update(mechanicId, { is_online: true });
-      console.log(`Mechanic ${mechanicId} connected and set as online`);
+      const doc = await Mechanic.findById(mechanicId);
+      // Only verified mechanics go "online" for discovery; unverified may still use the app
+      if (doc && doc.is_verified) {
+        await Mechanic.update(mechanicId, { is_online: true });
+        console.log(`Mechanic ${mechanicId} connected and set as online`);
+      }
     } catch (error) {
       console.error('Error setting mechanic online:', error);
     }
@@ -76,6 +89,11 @@ io.on('connection', (socket) => {
     }
 
     try {
+      const doc = await Mechanic.findById(mechanic.mechanicId);
+      if (!doc || !doc.is_verified) {
+        return;
+      }
+
       // Update current location in database
       const result = await Mechanic.updateLocation(mechanic.mechanicId, latitude, longitude);
       
@@ -167,20 +185,32 @@ io.on('connection', (socket) => {
 
       // Estimate ETA (assuming average speed of 40 km/h)
       const estimatedETA = Math.round((distance / 40) * 60); // in minutes
+      const distanceKm = parseFloat(distance.toFixed(2));
 
-      // Update booking with ETA
-      await Booking.update(bookingId, { estimated_eta: estimatedETA });
-
-      // Emit ETA to customer with mechanic's current location
-      io.to(`booking:${bookingId}`).emit('booking:eta-update', {
+      const payload = {
         bookingId,
-        eta: estimatedETA,
-        distance: distance.toFixed(2),
+        distance: distanceKm,
         mechanicLatitude: mechanicLat,
         mechanicLongitude: mechanicLng,
         customerLatitude,
-        customerLongitude
-      });
+        customerLongitude,
+      };
+
+      // ETA while en route only; after mechanic marks arrived, show map position without ETA refresh in DB
+      if (booking.status === 'accepted') {
+        await Booking.update(bookingId, { estimated_eta: estimatedETA });
+        payload.eta = estimatedETA;
+      } else if (
+        ['mechanic_arrived', 'arrival_confirmed', 'in_progress', 'completion_pending'].includes(
+          booking.status
+        )
+      ) {
+        payload.eta = null;
+      } else {
+        return;
+      }
+
+      io.to(`booking:${bookingId}`).emit('booking:eta-update', payload);
     } catch (error) {
       console.error('ETA calculation error:', error);
     }
