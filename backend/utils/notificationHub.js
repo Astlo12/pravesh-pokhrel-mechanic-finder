@@ -14,4 +14,13 @@ function emitNotificationRefresh(userId) {
   }
 }
 
-module.exports = { setNotificationIO, emitNotificationRefresh };
+function emitChatUnreadRefresh(userId) {
+  if (!ioRef || !userId) return;
+  try {
+    ioRef.to(`user:${userId}`).emit('chat:unread-refresh', { ts: Date.now() });
+  } catch (e) {
+    console.error('emitChatUnreadRefresh error:', e);
+  }
+}
+
+module.exports = { setNotificationIO, emitNotificationRefresh, emitChatUnreadRefresh };

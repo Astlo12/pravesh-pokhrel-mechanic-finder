@@ -2,12 +2,16 @@ const express = require('express');
 const http = require('http');
 const socketIo = require('socket.io');
 const cors = require('cors');
+const jwt = require('jsonwebtoken');
 require('dotenv').config();
 const { connectDB } = require('./config/database');
 const { testEmailConnection } = require('./utils/emailService');
 const Mechanic = require('./models/Mechanic');
 const Booking = require('./models/Booking');
-const { setNotificationIO } = require('./utils/notificationHub');
+const ChatMessage = require('./models/ChatMessage');
+const { canUserAccessBookingChat, getBookingForChat } = require('./utils/bookingChatAccess');
+const { setNotificationIO, emitChatUnreadRefresh } = require('./utils/notificationHub');
+const { notifyUser } = require('./utils/notify');
 
 const app = express();
 const server = http.createServer(app);
@@ -18,6 +22,26 @@ const io = socketIo(server, {
   }
 });
 setNotificationIO(io);
+
+io.use((socket, next) => {
+  try {
+    const token = socket.handshake.auth && socket.handshake.auth.token;
+    if (!token || typeof token !== 'string') {
+      socket.user = null;
+      return next();
+    }
+    const decoded = jwt.verify(token, process.env.JWT_SECRET || 'your_jwt_secret_key_here');
+    socket.user = {
+      id: decoded.id,
+      email: decoded.email,
+      user_type: decoded.user_type,
+    };
+    next();
+  } catch {
+    socket.user = null;
+    next();
+  }
+});
 
 // Middleware
 app.use(cors());
@@ -31,6 +55,7 @@ app.use('/api/bookings', require('./routes/bookings'));
 app.use('/api/reviews', require('./routes/reviews'));
 app.use('/api/admin', require('./routes/admin'));
 app.use('/api/notifications', require('./routes/notifications'));
+app.use('/api/messages', require('./routes/messages'));
 
 // Health check
 app.get('/api/health', (req, res) => {
@@ -220,6 +245,124 @@ io.on('connection', (socket) => {
   socket.on('booking:join', (data) => {
     const { bookingId } = data;
     socket.join(`booking:${bookingId}`);
+  });
+
+  function serializeChatMessage(doc) {
+    return {
+      id: doc._id.toString(),
+      booking_id: doc.booking_id.toString(),
+      sender_user_id: doc.sender_user_id.toString(),
+      sender_role: doc.sender_role,
+      body: doc.body,
+      created_at: doc.created_at,
+    };
+  }
+
+  socket.on('chat:join', async (data) => {
+    if (!socket.user) {
+      socket.emit('chat:error', { error: 'Sign in required for chat' });
+      return;
+    }
+    const bookingId = data && data.bookingId;
+    if (!bookingId || !/^[0-9a-fA-F]{24}$/.test(String(bookingId))) {
+      socket.emit('chat:error', { error: 'Invalid booking' });
+      return;
+    }
+    try {
+      const booking = await getBookingForChat(bookingId);
+      if (!booking) {
+        socket.emit('chat:error', { error: 'Booking not found' });
+        return;
+      }
+      const allowed = await canUserAccessBookingChat(socket.user, booking);
+      if (!allowed) {
+        socket.emit('chat:error', { error: 'Not allowed' });
+        return;
+      }
+      socket.join(`booking:${bookingId}`);
+      socket.emit('chat:joined', { bookingId });
+    } catch (e) {
+      console.error('chat:join error:', e);
+      socket.emit('chat:error', { error: 'Could not join chat' });
+    }
+  });
+
+  socket.on('chat:leave', (data) => {
+    const bookingId = data && data.bookingId;
+    if (bookingId && /^[0-9a-fA-F]{24}$/.test(String(bookingId))) {
+      socket.leave(`booking:${bookingId}`);
+    }
+  });
+
+  socket.on('chat:send', async (data) => {
+    if (!socket.user) {
+      socket.emit('chat:error', { error: 'Sign in required for chat' });
+      return;
+    }
+    const bookingId = data && data.bookingId;
+    const text = data && data.text;
+    if (!bookingId || !/^[0-9a-fA-F]{24}$/.test(String(bookingId))) {
+      socket.emit('chat:error', { error: 'Invalid booking' });
+      return;
+    }
+    try {
+      const booking = await getBookingForChat(bookingId);
+      if (!booking) {
+        socket.emit('chat:error', { error: 'Booking not found' });
+        return;
+      }
+      const allowed = await canUserAccessBookingChat(socket.user, booking);
+      if (!allowed) {
+        socket.emit('chat:error', { error: 'Not allowed' });
+        return;
+      }
+      const senderRole = socket.user.user_type === 'mechanic' ? 'mechanic' : 'customer';
+      const saved = await ChatMessage.create({
+        booking_id: bookingId,
+        sender_user_id: socket.user.id,
+        sender_role: senderRole,
+        body: typeof text === 'string' ? text : '',
+      });
+      const payload = serializeChatMessage(saved);
+      io.to(`booking:${bookingId}`).emit('chat:message', payload);
+
+      const customerId = booking.customer_id ? booking.customer_id.toString() : null;
+      const mechanicIdStr =
+        booking.mechanic_id && typeof booking.mechanic_id === 'object'
+          ? booking.mechanic_id.toString()
+          : String(booking.mechanic_id || '');
+      let recipientUserId = null;
+      if (socket.user.user_type === 'customer' && mechanicIdStr) {
+        const mechanicDoc = await Mechanic.findById(mechanicIdStr);
+        if (mechanicDoc && mechanicDoc.user_id) {
+          recipientUserId = mechanicDoc.user_id.toString();
+        }
+      } else if (socket.user.user_type === 'mechanic' && customerId) {
+        recipientUserId = customerId;
+      }
+      if (recipientUserId && recipientUserId !== socket.user.id) {
+        const preview = (payload.body || '').slice(0, 120);
+        const recipientIsCustomer = recipientUserId === customerId;
+        const link = recipientIsCustomer
+          ? `/chat/${bookingId}`
+          : `/mechanic/workspace/messages?booking=${bookingId}`;
+        try {
+          await notifyUser(recipientUserId, {
+            title: 'New message',
+            body: preview || 'You have a new message about a booking.',
+            type: 'chat_message',
+            link,
+            meta: { bookingId, senderUserId: socket.user.id },
+          });
+        } catch (notifyErr) {
+          console.error('Chat notify error:', notifyErr);
+        }
+        emitChatUnreadRefresh(recipientUserId);
+      }
+    } catch (e) {
+      const msg = e && e.message ? e.message : 'Send failed';
+      socket.emit('chat:error', { error: msg });
+    }
   });
 
   // Mechanic explicitly disconnects
