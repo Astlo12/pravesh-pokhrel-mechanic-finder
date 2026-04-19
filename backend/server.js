@@ -3,6 +3,8 @@ const http = require('http');
 const socketIo = require('socket.io');
 const cors = require('cors');
 const jwt = require('jsonwebtoken');
+const fs = require('fs');
+const path = require('path');
 require('dotenv').config();
 const { connectDB } = require('./config/database');
 const { testEmailConnection } = require('./utils/emailService');
@@ -93,6 +95,20 @@ app.use('/api/messages', require('./routes/messages'));
 app.get('/api/health', (req, res) => {
   res.json({ status: 'OK', message: 'Mechanic Finder API is running' });
 });
+
+// Serve frontend build when available (single-service deploy on Render)
+const frontendBuildPath = path.join(__dirname, '..', 'frontend', 'build');
+if (fs.existsSync(frontendBuildPath)) {
+  app.use(express.static(frontendBuildPath));
+  app.get('*', (req, res, next) => {
+    if (req.path.startsWith('/api') || req.path.startsWith('/socket.io')) {
+      return next();
+    }
+    res.sendFile(path.join(frontendBuildPath, 'index.html'));
+  });
+} else {
+  console.log('Frontend build not found. API-only mode enabled.');
+}
 
 // Socket.io for real-time updates
 const activeMechanics = new Map(); // socketId -> { mechanicId, userId }
