@@ -15,10 +15,42 @@ const { notifyUser } = require('./utils/notify');
 
 const app = express();
 const server = http.createServer(app);
+
+const parseAllowedOrigins = () => {
+  const rawOrigins = process.env.CORS_ORIGIN || process.env.FRONTEND_URL || 'http://localhost:3000';
+  return rawOrigins
+    .split(',')
+    .map((origin) => origin.trim().replace(/\/$/, ''))
+    .filter(Boolean);
+};
+
+const allowedOrigins = parseAllowedOrigins();
+const allowAllOrigins = allowedOrigins.includes('*');
+
+const corsOptions = {
+  origin: (origin, callback) => {
+    if (allowAllOrigins || !origin) {
+      callback(null, true);
+      return;
+    }
+
+    const normalizedOrigin = origin.replace(/\/$/, '');
+    if (allowedOrigins.includes(normalizedOrigin)) {
+      callback(null, true);
+      return;
+    }
+
+    callback(new Error('Not allowed by CORS'));
+  },
+  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+  credentials: true,
+};
+
 const io = socketIo(server, {
   cors: {
-    origin: process.env.FRONTEND_URL || "http://localhost:3000",
-    methods: ["GET", "POST"]
+    origin: allowAllOrigins ? '*' : allowedOrigins,
+    methods: ['GET', 'POST'],
+    credentials: true,
   }
 });
 setNotificationIO(io);
@@ -44,7 +76,7 @@ io.use((socket, next) => {
 });
 
 // Middleware
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(express.json());
 
 // Routes
