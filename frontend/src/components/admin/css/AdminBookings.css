@@ -1,0 +1,367 @@
+.adminbookings-container {
+  min-height: 100vh;
+  padding: 5rem 2rem 2rem;
+  background-color: #f5f7fa;
+}
+
+.adminbookings-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.adminbookings-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 0.5rem;
+}
+
+.adminbookings-subtitle {
+  font-size: 1rem;
+  color: #6b7280;
+}
+
+.adminbookings-back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background: #ffffff;
+  color: #3b82f6;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: 500;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
+}
+
+.adminbookings-back-btn:hover {
+  background: #3b82f6;
+  color: #ffffff;
+}
+
+.adminbookings-filters {
+  background: #ffffff;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.adminbookings-search-form {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.adminbookings-search-input {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.adminbookings-search-input:focus {
+  border-color: #3b82f6;
+}
+
+.adminbookings-search-btn {
+  padding: 0.75rem 1.5rem;
+  background: #3b82f6;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background 0.2s ease;
+}
+
+.adminbookings-search-btn:hover {
+  background: #2563eb;
+}
+
+.adminbookings-filter {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.adminbookings-filter label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #6b7280;
+}
+
+.adminbookings-select {
+  padding: 0.5rem 1rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  outline: none;
+  cursor: pointer;
+  transition: border-color 0.2s ease;
+}
+
+.adminbookings-select:focus {
+  border-color: #3b82f6;
+}
+
+.adminbookings-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.adminbookings-card {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.adminbookings-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.adminbookings-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.adminbookings-id {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.adminbookings-id-label {
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+.adminbookings-id-value {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  font-family: monospace;
+}
+
+.adminbookings-status-badge {
+  padding: 0.375rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.adminbookings-card-body {
+  margin-bottom: 1.5rem;
+}
+
+.adminbookings-parties {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background: #f9fafb;
+  border-radius: 8px;
+}
+
+.adminbookings-party {
+  flex: 1;
+}
+
+.adminbookings-party-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.adminbookings-avatar,
+.adminbookings-avatar-placeholder {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.adminbookings-avatar-placeholder {
+  background: #3b82f6;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.adminbookings-party-label {
+  font-size: 0.75rem;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.25rem;
+}
+
+.adminbookings-party-name {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin-bottom: 0.125rem;
+}
+
+.adminbookings-party-email {
+  font-size: 0.75rem;
+  color: #6b7280;
+  margin: 0;
+}
+
+.adminbookings-arrow {
+  color: #9ca3af;
+  font-size: 1.25rem;
+}
+
+.adminbookings-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.adminbookings-detail-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.adminbookings-detail-label {
+  font-size: 0.875rem;
+  color: #6b7280;
+  font-weight: 500;
+  min-width: 120px;
+}
+
+.adminbookings-detail-value {
+  font-size: 0.875rem;
+  color: #1a1a1a;
+  text-align: right;
+  flex: 1;
+}
+
+.adminbookings-card-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.adminbookings-status-select {
+  padding: 0.75rem 1rem;
+  border: 2px solid;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  outline: none;
+  transition: all 0.2s ease;
+  background: #ffffff;
+}
+
+.adminbookings-status-select:hover {
+  opacity: 0.8;
+}
+
+.adminbookings-pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.adminbookings-page-btn {
+  padding: 0.75rem 1.5rem;
+  background: #ffffff;
+  color: #3b82f6;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.adminbookings-page-btn:hover:not(:disabled) {
+  background: #3b82f6;
+  color: #ffffff;
+  border-color: #3b82f6;
+}
+
+.adminbookings-page-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.adminbookings-page-info {
+  color: #6b7280;
+  font-size: 0.875rem;
+}
+
+.adminbookings-loading,
+.adminbookings-error,
+.adminbookings-empty {
+  text-align: center;
+  padding: 3rem;
+  font-size: 1.125rem;
+  color: #6b7280;
+}
+
+.adminbookings-error {
+  color: #ef4444;
+}
+
+@media (max-width: 768px) {
+  .adminbookings-container {
+    padding: 4.5rem 1rem 1rem;
+  }
+
+  .adminbookings-parties {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .adminbookings-arrow {
+    transform: rotate(90deg);
+  }
+
+  .adminbookings-header {
+    flex-direction: column;
+  }
+
+  .adminbookings-detail-row {
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .adminbookings-detail-value {
+    text-align: left;
+  }
+}
+

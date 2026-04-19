@@ -1,0 +1,849 @@
+/* Shared mechanic workspace pages (#f8f9fa, cards, #dc143c) */
+
+.mechws-page {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+  padding-top: 5.5rem;
+  min-height: calc(100vh - 80px);
+  background: #f8f9fa;
+}
+
+.mechws-page-wide {
+  max-width: 1100px;
+}
+
+.mechws-loading {
+  text-align: center;
+  padding: 4rem 1rem;
+  color: #6c757d;
+}
+
+.mechws-loading i {
+  color: #dc143c;
+  margin-right: 0.5rem;
+}
+
+.mechws-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin-bottom: 1rem;
+  padding: 0.45rem 0.85rem;
+  background: white;
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+  color: #212529;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.mechws-back:hover {
+  border-color: #dc143c;
+  color: #dc143c;
+}
+
+.mechws-header h1 {
+  margin: 0 0 0.35rem;
+  font-size: 1.6rem;
+  color: #1a1a1a;
+}
+
+.mechws-header p {
+  margin: 0 0 1.5rem;
+  color: #6c757d;
+  font-size: 0.95rem;
+}
+
+.mechws-card {
+  background: white;
+  border: 1px solid #e9ecef;
+  border-radius: 14px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  margin-bottom: 1.25rem;
+  overflow: hidden;
+}
+
+.mechws-card-header {
+  padding: 0.85rem 1.15rem;
+  background: #f8f9fa;
+  border-bottom: 1px solid #e9ecef;
+  font-weight: 600;
+  color: #212529;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.mechws-card-header i {
+  color: #dc143c;
+}
+
+.mechws-card-body {
+  padding: 1.15rem 1.25rem;
+}
+
+.mechws-form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+@media (max-width: 640px) {
+  .mechws-form-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.mechws-field {
+  margin-bottom: 0.75rem;
+}
+
+.mechws-field label {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #495057;
+  margin-bottom: 0.35rem;
+}
+
+.mechws-field input,
+.mechws-field select,
+.mechws-field textarea {
+  width: 100%;
+  padding: 0.55rem 0.75rem;
+  border: 1px solid #ced4da;
+  border-radius: 8px;
+  font-size: 0.95rem;
+}
+
+.mechws-field textarea {
+  min-height: 80px;
+  resize: vertical;
+}
+
+.mechws-field-full {
+  grid-column: 1 / -1;
+}
+
+.mechws-chip-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.mechws-chip {
+  padding: 0.35rem 0.65rem;
+  border-radius: 20px;
+  border: 1px solid #dee2e6;
+  background: white;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.mechws-chip:hover {
+  border-color: #dc143c;
+  color: #dc143c;
+}
+
+.mechws-chip--on {
+  background: #dc143c;
+  border-color: #dc143c;
+  color: white;
+}
+
+.mechws-list-editor {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.mechws-list-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr auto;
+  gap: 0.5rem;
+  align-items: end;
+}
+
+@media (max-width: 640px) {
+  .mechws-list-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+.mechws-btn-remove {
+  padding: 0.5rem 0.65rem;
+  background: #f8d7da;
+  border: 1px solid #f5c2c7;
+  color: #842029;
+  border-radius: 8px;
+  cursor: pointer;
+  height: fit-content;
+}
+
+.mechws-btn-add {
+  margin-top: 0.5rem;
+  padding: 0.5rem 0.85rem;
+  background: white;
+  border: 1px dashed #adb5bd;
+  border-radius: 8px;
+  color: #495057;
+  cursor: pointer;
+  font-size: 0.88rem;
+}
+
+.mechws-btn-add:hover {
+  border-color: #dc143c;
+  color: #dc143c;
+}
+
+.mechws-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  margin-top: 1.25rem;
+  padding-top: 1rem;
+  border-top: 1px solid #e9ecef;
+}
+
+.mechws-btn-primary {
+  padding: 0.65rem 1.25rem;
+  background: #dc143c;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.mechws-btn-primary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.mechws-btn-secondary {
+  padding: 0.65rem 1.25rem;
+  background: white;
+  border: 1px solid #dee2e6;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  color: #212529;
+  align-items: center;
+}
+
+.mechws-alert {
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+}
+
+.mechws-alert--ok {
+  background: #d1e7dd;
+  border: 1px solid #badbcc;
+  color: #0f5132;
+}
+
+.mechws-alert--err {
+  background: #f8d7da;
+  border: 1px solid #f5c2c7;
+  color: #842029;
+}
+
+/* Reviews page */
+.mechws-review-item {
+  padding: 1rem;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.mechws-review-item:last-child {
+  border-bottom: none;
+}
+
+.mechws-review-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.35rem;
+}
+
+.mechws-stars {
+  color: #f39c12;
+  font-weight: 600;
+}
+
+/* Service history table */
+.mechws-table-wrap {
+  overflow-x: auto;
+}
+
+.mechws-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+}
+
+.mechws-table th,
+.mechws-table td {
+  padding: 0.65rem 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.mechws-table th {
+  background: #f8f9fa;
+  font-weight: 600;
+  color: #495057;
+}
+
+/* Messages / activity */
+.mechws-tabs {
+  display: flex;
+  gap: 0.35rem;
+  margin-bottom: 1rem;
+}
+
+.mechws-tab {
+  padding: 0.5rem 1rem;
+  border: 1px solid #dee2e6;
+  background: white;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.88rem;
+}
+
+.mechws-tab--active {
+  background: #dc143c;
+  border-color: #dc143c;
+  color: white;
+}
+
+.mechws-activity-item {
+  display: flex;
+  gap: 0.85rem;
+  padding: 0.85rem 0;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.mechws-activity-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: #e7f1ff;
+  color: #0d6efd;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.mechws-placeholder {
+  text-align: center;
+  padding: 2.5rem 1rem;
+  color: #6c757d;
+  background: #f8f9fa;
+  border-radius: 12px;
+  border: 1px dashed #ced4da;
+}
+
+.mechws-placeholder i {
+  font-size: 2.5rem;
+  color: #adb5bd;
+  margin-bottom: 0.75rem;
+  display: block;
+}
+
+/* Mechanic booking list page */
+.mechws-bookings-page .mechws-header p {
+  max-width: 42rem;
+}
+
+.mechws-bookings-verify-note {
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+  padding: 0.85rem 1rem;
+  background: #fff8e6;
+  border: 1px solid #ffe08a;
+  border-radius: 10px;
+  color: #664d03;
+  font-size: 0.9rem;
+  margin-bottom: 1.25rem;
+}
+
+.mechws-bookings-verify-note i {
+  color: #c9a227;
+  margin-top: 0.1rem;
+}
+
+.mechws-bookings-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.mechws-bookings-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.mechws-bookings-tab {
+  padding: 0.45rem 0.85rem;
+  border: 1px solid #dee2e6;
+  background: white;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: #495057;
+}
+
+.mechws-bookings-tab:hover {
+  border-color: #dc143c;
+  color: #dc143c;
+}
+
+.mechws-bookings-tab--active {
+  background: #dc143c;
+  border-color: #dc143c;
+  color: white;
+}
+
+.mechws-bookings-search {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex: 1;
+  min-width: 200px;
+  max-width: 360px;
+  padding: 0.45rem 0.75rem;
+  background: white;
+  border: 1px solid #ced4da;
+  border-radius: 8px;
+}
+
+.mechws-bookings-search i {
+  color: #adb5bd;
+}
+
+.mechws-bookings-search input {
+  border: none;
+  outline: none;
+  flex: 1;
+  font-size: 0.9rem;
+  min-width: 0;
+}
+
+.mechws-bookings-table-wrap {
+  display: none;
+  background: white;
+  border: 1px solid #e9ecef;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+@media (min-width: 900px) {
+  .mechws-bookings-table-wrap {
+    display: block;
+  }
+}
+
+.mechws-bookings-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.82rem;
+}
+
+.mechws-bookings-table th,
+.mechws-bookings-table td {
+  padding: 0.65rem 0.7rem;
+  text-align: left;
+  border-bottom: 1px solid #e9ecef;
+  vertical-align: top;
+}
+
+.mechws-bookings-table th {
+  background: #f8f9fa;
+  font-weight: 600;
+  color: #495057;
+  white-space: nowrap;
+}
+
+.mechws-bookings-ref {
+  font-family: ui-monospace, monospace;
+  font-size: 0.78rem;
+  color: #6c757d;
+}
+
+.mechws-bookings-customer {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.mechws-bookings-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #e9ecef;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #495057;
+  flex-shrink: 0;
+}
+
+.mechws-bookings-name {
+  font-weight: 600;
+  color: #212529;
+}
+
+.mechws-bookings-phone {
+  font-size: 0.8rem;
+  color: #0d6efd;
+  text-decoration: none;
+}
+
+.mechws-bookings-phone:hover {
+  text-decoration: underline;
+}
+
+.mechws-bookings-svc {
+  font-weight: 500;
+  text-transform: capitalize;
+}
+
+.mechws-bookings-veh {
+  font-size: 0.8rem;
+  color: #6c757d;
+}
+
+.mechws-bookings-issue {
+  font-size: 0.75rem;
+  color: #868e96;
+  margin-top: 0.25rem;
+  max-width: 220px;
+}
+
+.mechws-bookings-date,
+.mechws-bookings-eta {
+  white-space: nowrap;
+  font-size: 0.78rem;
+  color: #495057;
+}
+
+.mechws-bstatus {
+  display: inline-block;
+  padding: 0.2rem 0.5rem;
+  border-radius: 6px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.mechws-bstatus--pending {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.mechws-bstatus--accepted {
+  background: #cfe2ff;
+  color: #084298;
+}
+
+.mechws-bstatus--in_progress {
+  background: #d1e7dd;
+  color: #0f5132;
+}
+
+.mechws-bstatus--mechanic_arrived,
+.mechws-bstatus--completion_pending {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.mechws-bstatus--arrival_confirmed {
+  background: #cfe2ff;
+  color: #084298;
+}
+
+.mechws-bstatus--completed {
+  background: #e2e3e5;
+  color: #41464b;
+}
+
+.mechws-bstatus--cancelled,
+.mechws-bstatus--rejected {
+  background: #f8d7da;
+  color: #842029;
+}
+
+.mechws-bookings-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.mechws-ba {
+  padding: 0.3rem 0.55rem;
+  border-radius: 6px;
+  border: 1px solid transparent;
+  font-size: 0.72rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.mechws-ba:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.mechws-ba--accept {
+  background: #198754;
+  color: white;
+  border-color: #198754;
+}
+
+.mechws-ba--reject {
+  background: white;
+  color: #842029;
+  border-color: #f5c2c7;
+}
+
+.mechws-ba--prog {
+  background: #0d6efd;
+  color: white;
+  border-color: #0d6efd;
+}
+
+.mechws-ba--done {
+  background: #212529;
+  color: white;
+  border-color: #212529;
+}
+
+.mechws-ba--track {
+  background: white;
+  color: #dc143c;
+  border-color: #dc143c;
+}
+
+.mechws-bookings-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+@media (min-width: 900px) {
+  .mechws-bookings-cards {
+    display: none;
+  }
+}
+
+.mechws-bookings-card {
+  background: white;
+  border: 1px solid #e9ecef;
+  border-radius: 12px;
+  padding: 1rem 1.1rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.mechws-bookings-card-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.mechws-bookings-card h3 {
+  margin: 0 0 0.25rem;
+  font-size: 1.05rem;
+}
+
+.mechws-bookings-card-meta {
+  margin: 0.35rem 0;
+  font-size: 0.88rem;
+  color: #495057;
+}
+
+.mechws-bookings-card-date {
+  margin: 0.5rem 0 0;
+  font-size: 0.8rem;
+  color: #6c757d;
+}
+
+.mechws-bookings-card-eta {
+  margin: 0.35rem 0 0;
+  font-size: 0.85rem;
+  color: #0d6efd;
+}
+
+.mechws-bookings-actions--stack {
+  margin-top: 0.85rem;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.mechws-bookings-actions--stack .mechws-ba {
+  width: 100%;
+  padding: 0.5rem;
+  font-size: 0.85rem;
+}
+
+/* Mechanic messages — two-column chat */
+.mechws-chat-shell {
+  display: grid;
+  grid-template-columns: minmax(220px, 280px) 1fr;
+  gap: 1rem;
+  align-items: stretch;
+  min-height: 420px;
+}
+
+@media (max-width: 768px) {
+  .mechws-chat-shell {
+    grid-template-columns: 1fr;
+    min-height: 0;
+  }
+}
+
+.mechws-chat-sidebar {
+  background: white;
+  border: 1px solid #e9ecef;
+  border-radius: 14px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  max-height: min(72vh, 640px);
+}
+
+.mechws-chat-sidebar-head {
+  padding: 0.75rem 1rem;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: #1a1a1a;
+  border-bottom: 1px solid #e9ecef;
+  background: #f8f9fa;
+}
+
+.mechws-chat-sidebar-empty {
+  padding: 1.25rem;
+  color: #6c757d;
+  font-size: 0.88rem;
+}
+
+.mechws-chat-sidebar-hint {
+  margin-top: 0.5rem;
+  font-size: 0.8rem;
+  color: #868e96;
+}
+
+.mechws-chat-thread-list {
+  list-style: none;
+  margin: 0;
+  padding: 0.35rem;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.mechws-chat-thread {
+  width: 100%;
+  text-align: left;
+  padding: 0.65rem 0.75rem;
+  margin-bottom: 0.25rem;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  background: transparent;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.mechws-chat-thread:hover {
+  background: #f8f9fa;
+}
+
+.mechws-chat-thread--active {
+  background: #fff5f6;
+  border-color: rgba(220, 20, 60, 0.25);
+}
+
+.mechws-chat-thread-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.mechws-chat-thread-name {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: #212529;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.mechws-chat-thread-badge {
+  flex-shrink: 0;
+  min-width: 1.25rem;
+  padding: 0.1rem 0.4rem;
+  border-radius: 999px;
+  background: #dc143c;
+  color: #fff;
+  font-size: 0.68rem;
+  font-weight: 800;
+  text-align: center;
+  line-height: 1.25;
+}
+
+.mechws-chat-thread-meta {
+  display: block;
+  font-size: 0.75rem;
+  color: #6c757d;
+  margin-top: 0.2rem;
+  text-transform: capitalize;
+}
+
+.mechws-chat-main {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.mechws-chat-placeholder {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 320px;
+  background: white;
+  border: 1px dashed #dee2e6;
+  border-radius: 14px;
+  color: #6c757d;
+}
+
+.mechws-chat-placeholder i {
+  font-size: 2rem;
+  color: #dc143c;
+  opacity: 0.35;
+  margin-bottom: 0.5rem;
+}

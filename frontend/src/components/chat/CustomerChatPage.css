@@ -1,0 +1,92 @@
+.ccp-page {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 2rem 1.25rem;
+  padding-top: 5.5rem;
+  min-height: calc(100vh - 80px);
+  background: #f5f5f5;
+}
+
+.ccp-loading {
+  text-align: center;
+  color: #6c757d;
+  padding-top: 6rem;
+}
+
+.ccp-loading i {
+  color: #dc143c;
+  margin-right: 0.5rem;
+}
+
+.ccp-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin-bottom: 1rem;
+  padding: 0.45rem 0.85rem;
+  background: white;
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+  color: #212529;
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.ccp-back:hover {
+  border-color: #dc143c;
+  color: #dc143c;
+}
+
+.ccp-header h1 {
+  margin: 0 0 0.35rem;
+  font-size: 1.65rem;
+  color: #1a1a1a;
+}
+
+.ccp-header p {
+  margin: 0 0 1.25rem;
+  color: #6c757d;
+  font-size: 0.95rem;
+}
+
+.ccp-card {
+  background: white;
+  border: 1px solid #e9ecef;
+  border-radius: 14px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.ccp-card--narrow {
+  max-width: 440px;
+  margin: 2rem auto;
+  text-align: center;
+}
+
+.ccp-card h1 {
+  font-size: 1.25rem;
+  color: #1a1a1a;
+  margin-bottom: 0.5rem;
+}
+
+.ccp-card p {
+  color: #6c757d;
+  margin-bottom: 1rem;
+}
+
+.ccp-btn {
+  display: inline-block;
+  padding: 0.55rem 1.1rem;
+  background: #dc143c;
+  color: white;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.ccp-btn:hover {
+  background: #b01030;
+  color: white;
+}

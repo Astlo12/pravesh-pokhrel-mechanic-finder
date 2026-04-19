@@ -1,0 +1,599 @@
+/* MechanicList Page Styles - All classes prefixed with mechaniclist- */
+
+.mechaniclist-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2rem;
+  padding-top: 5rem; /* Extra padding to account for fixed navbar */
+  background-color: #f5f5f5;
+  min-height: calc(100vh - 80px);
+}
+
+.mechaniclist-header {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem;
+}
+
+.mechaniclist-title-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.mechaniclist-title-section h1 {
+  margin: 0;
+  color: #1a1a1a;
+  font-size: 2rem;
+}
+
+.mechaniclist-verified-hint {
+  margin: -0.5rem 0 1.25rem;
+  padding: 0.5rem 0.75rem;
+  background: #e7f3ff;
+  border: 1px solid #b8daff;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  color: #004085;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.mechaniclist-verified-hint i {
+  color: #28a745;
+}
+
+.mechaniclist-emergency-btn {
+  background: #ff4444;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.3s;
+  box-shadow: 0 2px 8px rgba(255, 68, 68, 0.3);
+}
+
+.mechaniclist-emergency-btn:hover {
+  background: #cc0000;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 68, 68, 0.4);
+}
+
+.mechaniclist-emergency-btn.active {
+  background: #28a745;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 2px 8px rgba(255, 68, 68, 0.3); }
+  50% { box-shadow: 0 2px 16px rgba(255, 68, 68, 0.6); }
+}
+
+.mechaniclist-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.mechaniclist-filters {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.mechaniclist-filter-select,
+.mechaniclist-filter-input {
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 1rem;
+  transition: border-color 0.3s;
+}
+
+.mechaniclist-filter-select:focus,
+.mechaniclist-filter-input:focus {
+  outline: none;
+  border-color: #dc143c;
+}
+
+.mechaniclist-filter-input {
+  flex: 1;
+  min-width: 200px;
+}
+
+.mechaniclist-location-controls {
+  background: #f8f9fa;
+  padding: 1.5rem;
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+}
+
+.mechaniclist-location-section h3 {
+  margin: 0 0 1rem 0;
+  color: #1a1a1a;
+  font-size: 1.1rem;
+}
+
+.mechaniclist-location-options {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.mechaniclist-location-btn {
+  background: #17a2b8;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: background 0.3s;
+}
+
+.mechaniclist-location-btn:hover {
+  background: #138496;
+}
+
+
+.mechaniclist-current-location {
+  margin-top: 0.75rem;
+  color: #28a745;
+  font-size: 0.95rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.mechaniclist-location-name {
+  margin-top: 0.5rem;
+  color: #2e7d32;
+  font-size: 0.95rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.mechaniclist-location-name strong {
+  color: #1b5e20;
+}
+
+.mechaniclist-location-status {
+  background: #f0f9ff;
+  padding: 1rem;
+  border-radius: 8px;
+  border: 1px solid #b3e5fc;
+}
+
+.mechaniclist-location-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.mechaniclist-location-help {
+  margin-top: 0.5rem;
+  color: #666;
+  font-size: 0.9rem;
+  font-style: italic;
+}
+
+.mechaniclist-refresh-location-btn {
+  background: #17a2b8;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+  transition: background 0.3s;
+}
+
+.mechaniclist-refresh-location-btn:hover {
+  background: #138496;
+}
+
+.mechaniclist-toggle-map-btn {
+  background: #6c757d;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  align-self: flex-start;
+  transition: background 0.3s;
+}
+
+.mechaniclist-toggle-map-btn:hover {
+  background: #5a6268;
+}
+
+.mechaniclist-error-message {
+  background: #fee;
+  color: #c33;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+  text-align: center;
+  font-weight: 500;
+}
+
+.mechaniclist-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+.mechaniclist-map-section {
+  background: white;
+  border-radius: 12px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  height: 600px;
+}
+
+.mechaniclist-search-indicator {
+  position: absolute;
+  top: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(220, 20, 60, 0.95);
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 25px;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-weight: 600;
+  font-size: 0.95rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  animation: slideDown 0.3s ease-out;
+  backdrop-filter: blur(10px);
+}
+
+.mechaniclist-emergency-indicator {
+  position: absolute;
+  top: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(255, 68, 68, 0.95);
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 25px;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-weight: 600;
+  font-size: 0.95rem;
+  box-shadow: 0 4px 12px rgba(255, 68, 68, 0.4);
+  animation: slideDown 0.3s ease-out, pulse 2s infinite;
+  backdrop-filter: blur(10px);
+}
+
+.mechaniclist-emergency-indicator i {
+  font-size: 1.1rem;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.mechaniclist-search-indicator i {
+  font-size: 1.1rem;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+.mechaniclist-results-section {
+  background: white;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  max-height: 600px;
+  overflow-y: auto;
+}
+
+.mechaniclist-results-header {
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid #dc143c;
+}
+
+.mechaniclist-results-header h2 {
+  margin: 0 0 0.5rem 0;
+  color: #1a1a1a;
+}
+
+.mechaniclist-emergency-notice {
+  background: #fff3cd;
+  color: #856404;
+  padding: 0.75rem;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+}
+
+.mechaniclist-loading,
+.mechaniclist-no-mechanics {
+  text-align: center;
+  padding: 3rem;
+  color: #666;
+}
+
+.mechaniclist-initial-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  text-align: center;
+}
+
+.mechaniclist-loading-spinner {
+  font-size: 3rem;
+  color: #dc143c;
+  margin-bottom: 1rem;
+}
+
+.mechaniclist-loading-hint {
+  color: #999;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+}
+
+.mechaniclist-no-mechanics i {
+  font-size: 3rem;
+  color: #999;
+  margin-bottom: 1rem;
+}
+
+.mechaniclist-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.mechaniclist-card {
+  background: #f8f9fa;
+  border-radius: 10px;
+  padding: 1.5rem;
+  border: 2px solid transparent;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+
+.mechaniclist-card:hover {
+  border-color: #dc143c;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.mechaniclist-card.selected {
+  border-color: #dc143c;
+  background: #fff5f7;
+}
+
+.mechaniclist-card-avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #dc143c;
+  margin-right: 1rem;
+  flex-shrink: 0;
+}
+
+.mechaniclist-card-header {
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #e0e0e0;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.mechaniclist-card-header h3 {
+  margin: 0;
+  color: #1a1a1a;
+  flex: 1;
+}
+
+.mechaniclist-verified-badge {
+  background: #28a745;
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.mechaniclist-rating {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #f39c12;
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.mechaniclist-review-count {
+  color: #666;
+  font-size: 0.9rem;
+  font-weight: normal;
+}
+
+.mechaniclist-card-info {
+  margin-bottom: 1rem;
+}
+
+.mechaniclist-card-info p {
+  margin: 0.5rem 0;
+  color: #555;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.mechaniclist-card-info i {
+  color: #dc143c;
+  width: 20px;
+}
+
+.mechaniclist-status-online {
+  color: #28a745;
+  font-weight: 600;
+}
+
+.mechaniclist-status-offline {
+  color: #dc3545;
+  font-weight: 600;
+}
+
+.mechaniclist-available-badge {
+  background: #28a745;
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  margin-left: 0.5rem;
+}
+
+.mechaniclist-vehicle-capabilities {
+  margin-bottom: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #e0e0e0;
+}
+
+.mechaniclist-vehicle-capabilities strong {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+.mechaniclist-capability-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.mechaniclist-capability-tag {
+  background: #e8f4f8;
+  color: #2c3e50;
+  padding: 0.4rem 0.8rem;
+  border-radius: 15px;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.mechaniclist-btn-view-profile {
+  display: block;
+  text-align: center;
+  padding: 0.75rem;
+  background: linear-gradient(135deg, #dc143c 0%, #b0102e 100%);
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: 600;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 2px 8px rgba(220, 20, 60, 0.3);
+}
+
+.mechaniclist-btn-view-profile:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(220, 20, 60, 0.4);
+}
+
+.enhancedmap-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: #666;
+  font-size: 1.1rem;
+}
+
+@media (max-width: 1024px) {
+  .mechaniclist-content {
+    grid-template-columns: 1fr;
+  }
+
+  .mechaniclist-map-section {
+    height: 400px;
+  }
+}
+
+@media (max-width: 768px) {
+  .mechaniclist-container {
+    padding: 1rem;
+    padding-top: 5rem; /* Extra padding on mobile for taller navbar */
+  }
+
+  .mechaniclist-title-section {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .mechaniclist-location-options {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+
+  .mechaniclist-map-section {
+    height: 300px;
+  }
+}

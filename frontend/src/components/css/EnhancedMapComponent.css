@@ -1,0 +1,40 @@
+/* EnhancedMapComponent Styles */
+
+.custom-marker {
+  background: transparent !important;
+  border: none !important;
+}
+
+/* Search radius circle animation - pulsing effect */
+:global(.leaflet-interactive.search-radius-circle-pulse) {
+  animation: pulseRadius 1.5s ease-in-out infinite;
+  transition: opacity 0.3s, fill-opacity 0.3s, stroke-opacity 0.3s;
+}
+
+@keyframes pulseRadius {
+  0%, 100% {
+    fill-opacity: 0.15;
+    stroke-opacity: 0.7;
+  }
+  50% {
+    fill-opacity: 0.3;
+    stroke-opacity: 1;
+  }
+}
+
+/* Ensure the circle is visible and animated */
+:global(.leaflet-interactive.search-radius-circle-pulse path) {
+  animation: pulseRadiusPath 1.5s ease-in-out infinite;
+}
+
+@keyframes pulseRadiusPath {
+  0%, 100% {
+    opacity: 0.7;
+    stroke-width: 3;
+  }
+  50% {
+    opacity: 1;
+    stroke-width: 4;
+  }
+}
+

@@ -1,0 +1,361 @@
+.adminmechanics-container {
+  min-height: 100vh;
+  padding: 5rem 2rem 2rem;
+  background-color: #f5f7fa;
+}
+
+.adminmechanics-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.adminmechanics-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 0.5rem;
+}
+
+.adminmechanics-subtitle {
+  font-size: 1rem;
+  color: #6b7280;
+}
+
+.adminmechanics-back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background: #ffffff;
+  color: #3b82f6;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: 500;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
+}
+
+.adminmechanics-back-btn:hover {
+  background: #3b82f6;
+  color: #ffffff;
+}
+
+.adminmechanics-filters {
+  background: #ffffff;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.adminmechanics-search-form {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.adminmechanics-search-input {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.adminmechanics-search-input:focus {
+  border-color: #3b82f6;
+}
+
+.adminmechanics-search-btn {
+  padding: 0.75rem 1.5rem;
+  background: #3b82f6;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background 0.2s ease;
+}
+
+.adminmechanics-search-btn:hover {
+  background: #2563eb;
+}
+
+.adminmechanics-filter-group {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.adminmechanics-filter {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.adminmechanics-filter label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #6b7280;
+}
+
+.adminmechanics-select {
+  padding: 0.5rem 1rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  outline: none;
+  cursor: pointer;
+  transition: border-color 0.2s ease;
+}
+
+.adminmechanics-select:focus {
+  border-color: #3b82f6;
+}
+
+.adminmechanics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.adminmechanics-card {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.adminmechanics-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+}
+
+.adminmechanics-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.adminmechanics-user-info {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.adminmechanics-avatar,
+.adminmechanics-avatar-placeholder {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.adminmechanics-avatar-placeholder {
+  background: #3b82f6;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.adminmechanics-name {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin-bottom: 0.25rem;
+}
+
+.adminmechanics-email {
+  font-size: 0.875rem;
+  color: #6b7280;
+  margin: 0;
+}
+
+.adminmechanics-status-badges {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: flex-end;
+}
+
+.adminmechanics-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.adminmechanics-badge.verified {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.adminmechanics-badge.online {
+  background: #dbeafe;
+  color: #1e40af;
+}
+
+.adminmechanics-badge.offline {
+  background: #f3f4f6;
+  color: #6b7280;
+}
+
+.adminmechanics-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.adminmechanics-info-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.adminmechanics-label {
+  font-size: 0.875rem;
+  color: #6b7280;
+  font-weight: 500;
+}
+
+.adminmechanics-value {
+  font-size: 0.875rem;
+  color: #1a1a1a;
+  font-weight: 500;
+}
+
+.adminmechanics-card-actions {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.adminmechanics-verify-btn,
+.adminmechanics-view-btn {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  text-decoration: none;
+}
+
+.adminmechanics-verify-btn {
+  background: #f3f4f6;
+  color: #6b7280;
+}
+
+.adminmechanics-verify-btn:hover {
+  background: #e5e7eb;
+}
+
+.adminmechanics-verify-btn.verified {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+.adminmechanics-verify-btn.verified:hover {
+  background: #dc2626;
+  color: #ffffff;
+}
+
+.adminmechanics-view-btn {
+  background: #3b82f6;
+  color: #ffffff;
+}
+
+.adminmechanics-view-btn:hover {
+  background: #2563eb;
+}
+
+.adminmechanics-pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.adminmechanics-page-btn {
+  padding: 0.75rem 1.5rem;
+  background: #ffffff;
+  color: #3b82f6;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.adminmechanics-page-btn:hover:not(:disabled) {
+  background: #3b82f6;
+  color: #ffffff;
+  border-color: #3b82f6;
+}
+
+.adminmechanics-page-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.adminmechanics-page-info {
+  color: #6b7280;
+  font-size: 0.875rem;
+}
+
+.adminmechanics-loading,
+.adminmechanics-error,
+.adminmechanics-empty {
+  text-align: center;
+  padding: 3rem;
+  font-size: 1.125rem;
+  color: #6b7280;
+}
+
+.adminmechanics-error {
+  color: #ef4444;
+}
+
+@media (max-width: 768px) {
+  .adminmechanics-container {
+    padding: 4.5rem 1rem 1rem;
+  }
+
+  .adminmechanics-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .adminmechanics-header {
+    flex-direction: column;
+  }
+}
+

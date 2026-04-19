@@ -1,0 +1,316 @@
+.adminverification-container {
+  min-height: 100vh;
+  padding: 5rem 2rem 2rem;
+  background-color: #f5f7fa;
+}
+
+.adminverification-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.adminverification-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 0.5rem;
+}
+
+.adminverification-subtitle {
+  font-size: 1rem;
+  color: #6b7280;
+}
+
+.adminverification-back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background: #ffffff;
+  color: #3b82f6;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: 500;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
+}
+
+.adminverification-back-btn:hover {
+  background: #3b82f6;
+  color: #ffffff;
+}
+
+.adminverification-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.adminverification-stat-card {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.adminverification-stat-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  color: #ffffff;
+}
+
+.adminverification-stat-icon.unverified {
+  background-color: #f59e0b;
+}
+
+.adminverification-stat-icon.verified {
+  background-color: #10b981;
+}
+
+.adminverification-stat-content {
+  flex: 1;
+}
+
+.adminverification-stat-value {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 0.25rem;
+}
+
+.adminverification-stat-label {
+  font-size: 0.875rem;
+  color: #6b7280;
+  margin: 0;
+}
+
+.adminverification-filters {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.adminverification-filter-btn {
+  padding: 0.75rem 1.5rem;
+  background: #ffffff;
+  color: #6b7280;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.adminverification-filter-btn:hover {
+  background: #f9fafb;
+}
+
+.adminverification-filter-btn.active {
+  background: #3b82f6;
+  color: #ffffff;
+  border-color: #3b82f6;
+}
+
+.adminverification-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 1.5rem;
+}
+
+.adminverification-card {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.adminverification-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+}
+
+.adminverification-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.adminverification-user-info {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.adminverification-avatar,
+.adminverification-avatar-placeholder {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.adminverification-avatar-placeholder {
+  background: #3b82f6;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.adminverification-name {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin-bottom: 0.25rem;
+}
+
+.adminverification-email {
+  font-size: 0.875rem;
+  color: #6b7280;
+  margin: 0;
+}
+
+.adminverification-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.375rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.adminverification-badge.verified {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.adminverification-badge.unverified {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.adminverification-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.adminverification-info-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.adminverification-label {
+  font-size: 0.875rem;
+  color: #6b7280;
+  font-weight: 500;
+}
+
+.adminverification-value {
+  font-size: 0.875rem;
+  color: #1a1a1a;
+  font-weight: 500;
+  text-align: right;
+}
+
+.adminverification-card-actions {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.adminverification-verify-btn,
+.adminverification-view-btn {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  text-decoration: none;
+}
+
+.adminverification-verify-btn {
+  background: #f3f4f6;
+  color: #6b7280;
+}
+
+.adminverification-verify-btn:hover {
+  background: #e5e7eb;
+}
+
+.adminverification-verify-btn.verified {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+.adminverification-verify-btn.verified:hover {
+  background: #dc2626;
+  color: #ffffff;
+}
+
+.adminverification-view-btn {
+  background: #3b82f6;
+  color: #ffffff;
+}
+
+.adminverification-view-btn:hover {
+  background: #2563eb;
+}
+
+.adminverification-loading,
+.adminverification-error,
+.adminverification-empty {
+  text-align: center;
+  padding: 3rem;
+  font-size: 1.125rem;
+  color: #6b7280;
+}
+
+.adminverification-error {
+  color: #ef4444;
+}
+
+@media (max-width: 768px) {
+  .adminverification-container {
+    padding: 4.5rem 1rem 1rem;
+  }
+
+  .adminverification-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .adminverification-header {
+    flex-direction: column;
+  }
+}
+

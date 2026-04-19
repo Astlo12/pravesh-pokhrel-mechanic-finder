@@ -1,0 +1,782 @@
+/* Mechanic workspace — matches Booking / Dashboard (#f8f9fa, white cards, #dc143c) */
+
+.mechdash-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+  padding-top: 5.5rem;
+  min-height: calc(100vh - 80px);
+  background-color: #f8f9fa;
+}
+
+.mechdash-verification-banner {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  padding: 1.1rem 1.25rem;
+  margin-bottom: 1.5rem;
+  background: #fff3cd;
+  border: 1px solid #ffc107;
+  border-radius: 12px;
+  color: #856404;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.mechdash-verification-banner-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  background: #ffc107;
+  color: #664d03;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  flex-shrink: 0;
+}
+
+.mechdash-verification-banner-text strong {
+  display: block;
+  font-size: 1.05rem;
+  margin-bottom: 0.35rem;
+  color: #664d03;
+}
+
+.mechdash-verification-banner-text p {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.mechdash-job-board-notice {
+  display: flex;
+  gap: 0.65rem;
+  align-items: flex-start;
+  padding: 0.75rem 1rem;
+  margin-bottom: 1rem;
+  background: #e7f1ff;
+  border: 1px solid #b6d4fe;
+  border-radius: 10px;
+  font-size: 0.88rem;
+  color: #084298;
+}
+
+.mechdash-job-board-notice i {
+  margin-top: 0.1rem;
+  flex-shrink: 0;
+}
+
+.mechdash-btn--disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.mechdash-job-actions .mechdash-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.mechdash-loading {
+  text-align: center;
+  padding: 4rem 1rem;
+  color: #6c757d;
+  font-size: 1.05rem;
+}
+
+.mechdash-loading i {
+  display: block;
+  margin-bottom: 1rem;
+  font-size: 2rem;
+  color: #dc143c;
+}
+
+/* Header */
+.mechdash-header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.mechdash-header-main h1 {
+  margin: 0 0 0.35rem;
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #1a1a1a;
+}
+
+.mechdash-header-main p {
+  margin: 0;
+  color: #6c757d;
+  font-size: 0.95rem;
+}
+
+.mechdash-header-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.mechdash-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.55rem 1rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1px solid #e9ecef;
+  background: white;
+  color: #212529;
+  text-decoration: none;
+  transition: border-color 0.2s, color 0.2s, background 0.2s;
+}
+
+.mechdash-btn:hover {
+  border-color: #dc143c;
+  color: #dc143c;
+}
+
+.mechdash-btn--primary {
+  background: #dc143c;
+  border-color: #dc143c;
+  color: white;
+}
+
+.mechdash-btn--primary:hover {
+  background: #b0102e;
+  border-color: #b0102e;
+  color: white;
+}
+
+/* Stats */
+.mechdash-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+@media (max-width: 900px) {
+  .mechdash-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .mechdash-stats {
+    grid-template-columns: 1fr;
+  }
+}
+
+.mechdash-stat-card {
+  background: white;
+  border: 1px solid #e9ecef;
+  border-radius: 12px;
+  padding: 1.1rem 1.25rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.mechdash-stat-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #212529;
+  font-variant-numeric: tabular-nums;
+}
+
+.mechdash-stat-label {
+  font-size: 0.8rem;
+  color: #6c757d;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-top: 0.25rem;
+}
+
+/* Grid: status + jobs */
+.mechdash-grid {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+@media (max-width: 992px) {
+  .mechdash-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Cards */
+.mechdash-card {
+  background: white;
+  border: 1px solid #e9ecef;
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  margin-bottom: 1.5rem;
+}
+
+.mechdash-card:last-child {
+  margin-bottom: 0;
+}
+
+.mechdash-card-header {
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid #e9ecef;
+  background: #f8f9fa;
+}
+
+.mechdash-card-header h2 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #212529;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.mechdash-card-header i {
+  color: #dc143c;
+}
+
+.mechdash-card-body {
+  padding: 1.25rem;
+}
+
+/* Toggle rows */
+.mechdash-toggle-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.85rem 0;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.mechdash-toggle-row:last-of-type {
+  border-bottom: none;
+}
+
+.mechdash-toggle-info strong {
+  display: block;
+  color: #212529;
+  font-size: 0.95rem;
+  margin-bottom: 0.2rem;
+}
+
+.mechdash-toggle-info span {
+  font-size: 0.8rem;
+  color: #6c757d;
+  line-height: 1.4;
+}
+
+.mechdash-switch {
+  position: relative;
+  width: 48px;
+  height: 26px;
+  flex-shrink: 0;
+}
+
+.mechdash-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.mechdash-switch-slider {
+  position: absolute;
+  cursor: pointer;
+  inset: 0;
+  background: #ced4da;
+  border-radius: 26px;
+  transition: background 0.2s;
+}
+
+.mechdash-switch-slider::before {
+  position: absolute;
+  content: '';
+  height: 20px;
+  width: 20px;
+  left: 3px;
+  bottom: 3px;
+  background: white;
+  border-radius: 50%;
+  transition: transform 0.2s;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.mechdash-switch input:checked + .mechdash-switch-slider {
+  background: #28a745;
+}
+
+.mechdash-switch input:checked + .mechdash-switch-slider::before {
+  transform: translateX(22px);
+}
+
+.mechdash-switch input:disabled + .mechdash-switch-slider {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.mechdash-hint {
+  margin: 0;
+  padding: 0.75rem 1.25rem;
+  background: #e7f3ff;
+  border-top: 1px solid #e9ecef;
+  font-size: 0.85rem;
+  color: #495057;
+  line-height: 1.45;
+}
+
+.mechdash-hint i {
+  color: #0d6efd;
+  margin-right: 0.35rem;
+}
+
+.mechdash-meta-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.mechdash-meta-list li {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.5rem 0;
+  font-size: 0.9rem;
+  border-bottom: 1px solid #f1f3f5;
+}
+
+.mechdash-meta-list li:last-child {
+  border-bottom: none;
+}
+
+.mechdash-meta-list span:first-child {
+  color: #6c757d;
+}
+
+.mechdash-meta-list span:last-child {
+  color: #212529;
+  font-weight: 500;
+  text-align: right;
+}
+
+.mechdash-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.2rem 0.5rem;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.mechdash-badge--verified {
+  background: #d4edda;
+  color: #155724;
+}
+
+.mechdash-badge--unverified {
+  background: #fff3cd;
+  color: #856404;
+}
+
+/* Job board */
+.mechdash-board-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.mechdash-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.mechdash-tab {
+  padding: 0.45rem 0.9rem;
+  border-radius: 8px;
+  border: 1px solid #e9ecef;
+  background: white;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #495057;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.mechdash-tab:hover {
+  border-color: #dc143c;
+  color: #dc143c;
+}
+
+.mechdash-tab--active {
+  background: #dc143c;
+  border-color: #dc143c;
+  color: white;
+}
+
+.mechdash-tab--active:hover {
+  color: white;
+  background: #b0102e;
+  border-color: #b0102e;
+}
+
+.mechdash-empty {
+  text-align: center;
+  padding: 2.5rem 1rem;
+  color: #6c757d;
+  background: #f8f9fa;
+  border-radius: 12px;
+  border: 1px dashed #dee2e6;
+}
+
+.mechdash-empty i {
+  font-size: 2rem;
+  color: #adb5bd;
+  margin-bottom: 0.75rem;
+  display: block;
+}
+
+.mechdash-job-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.mechdash-job {
+  border: 1px solid #e9ecef;
+  border-radius: 12px;
+  padding: 1.15rem 1.25rem;
+  background: #fff;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+}
+
+.mechdash-job-top {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.mechdash-job-customer {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.mechdash-job-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  background: #e9ecef;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  color: #495057;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.mechdash-job-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.mechdash-job-customer h3 {
+  margin: 0 0 0.15rem;
+  font-size: 1.05rem;
+  color: #1a1a1a;
+}
+
+.mechdash-job-customer p {
+  margin: 0;
+  font-size: 0.85rem;
+  color: #6c757d;
+}
+
+.mechdash-job-status {
+  padding: 0.35rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.mechdash-job-status--pending {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.mechdash-job-status--accepted,
+.mechdash-job-status--in_progress,
+.mechdash-job-status--arrival_confirmed {
+  background: #cce5ff;
+  color: #004085;
+}
+
+.mechdash-job-status--mechanic_arrived,
+.mechdash-job-status--completion_pending {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.mechdash-job-status--completed {
+  background: #d4edda;
+  color: #155724;
+}
+
+.mechdash-job-status--cancelled,
+.mechdash-job-status--rejected {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+.mechdash-job-details {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 0.5rem 1rem;
+  font-size: 0.88rem;
+  color: #495057;
+  margin-bottom: 1rem;
+}
+
+.mechdash-job-details strong {
+  color: #212529;
+}
+
+.mechdash-job-live {
+  font-size: 0.88rem;
+  color: #0d6efd;
+  margin-bottom: 0.75rem;
+}
+
+.mechdash-job-live i {
+  margin-right: 0.35rem;
+}
+
+.mechdash-waiting-inline {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.85rem;
+  color: #856404;
+  background: #fff8e6;
+  border: 1px solid #ffe69c;
+  padding: 0.45rem 0.75rem;
+  border-radius: 8px;
+  width: 100%;
+  max-width: 100%;
+}
+
+.mechdash-waiting-inline i {
+  color: #d97706;
+}
+
+.mechdash-job-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.mechdash-job-actions .mechdash-btn {
+  padding: 0.5rem 0.85rem;
+  font-size: 0.85rem;
+}
+
+.mechdash-btn-accept {
+  background: #28a745;
+  border-color: #28a745;
+  color: white;
+}
+
+.mechdash-btn-accept:hover {
+  background: #218838;
+  border-color: #218838;
+  color: white;
+}
+
+.mechdash-btn-reject {
+  background: white;
+  border-color: #dc3545;
+  color: #dc3545;
+}
+
+.mechdash-btn-reject:hover {
+  background: #dc3545;
+  color: white;
+}
+
+.mechdash-btn-progress {
+  background: #0d6efd;
+  border-color: #0d6efd;
+  color: white;
+}
+
+.mechdash-btn-progress:hover {
+  background: #0b5ed7;
+  border-color: #0b5ed7;
+  color: white;
+}
+
+.mechdash-btn-complete {
+  background: #198754;
+  border-color: #198754;
+  color: white;
+}
+
+.mechdash-btn-complete:hover {
+  background: #157347;
+  color: white;
+}
+
+/* Quick navigation */
+.mechdash-quicknav {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.65rem;
+  margin-bottom: 1.5rem;
+}
+
+@media (max-width: 768px) {
+  .mechdash-quicknav {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.mechdash-quicknav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.85rem 0.5rem;
+  background: white;
+  border: 1px solid #e9ecef;
+  border-radius: 12px;
+  text-decoration: none;
+  color: #212529;
+  font-size: 0.82rem;
+  font-weight: 600;
+  text-align: center;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.mechdash-quicknav-item i {
+  font-size: 1.25rem;
+  color: #dc143c;
+}
+
+.mechdash-quicknav-item:hover {
+  border-color: #dc143c;
+  color: #dc143c;
+}
+
+/* Insights + achievements */
+.mechdash-insights-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+  align-items: stretch;
+}
+
+@media (max-width: 992px) {
+  .mechdash-insights-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+.mechdash-insights-row .mechdash-card {
+  margin-bottom: 0;
+}
+
+.mechdash-insights-body {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+@media (max-width: 520px) {
+  .mechdash-insights-body {
+    grid-template-columns: 1fr;
+  }
+}
+
+.mechdash-insight-value {
+  display: block;
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #212529;
+  font-variant-numeric: tabular-nums;
+}
+
+.mechdash-insight-label {
+  font-size: 0.75rem;
+  color: #6c757d;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.mechdash-achievements-body {
+  padding-top: 0.75rem;
+}
+
+.mechdash-achievements-empty {
+  margin: 0;
+  color: #6c757d;
+  font-size: 0.9rem;
+}
+
+.mechdash-achievement-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.mechdash-achievement-item {
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+}
+
+.mechdash-achievement-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: #fff5f5;
+  color: #dc143c;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.mechdash-achievement-item strong {
+  display: block;
+  font-size: 0.9rem;
+  color: #1a1a1a;
+}
+
+.mechdash-achievement-item span {
+  font-size: 0.8rem;
+  color: #6c757d;
+}
